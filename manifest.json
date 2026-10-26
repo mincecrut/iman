@@ -1,0 +1,15 @@
+{
+  "name": "Иман — исламский сайт",
+  "short_name": "Иман",
+  "description": "Коран с переводом и аудио, тасбих, дуа, 99 имён Аллаhа.",
+  "lang": "ru",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f0e2",
+  "theme_color": "#1f5a3a",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

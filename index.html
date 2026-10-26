@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src https:; connect-src 'self' https://api.alquran.cloud https://api.aladhan.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>Иман — исламский сайт</title>
+  <meta name="description" content="Коран с переводом и аудио, тасбих, 99 имён Аллаhа и дуа.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Иман — исламский сайт">
+  <meta property="og:description" content="Коран с переводом и аудио, заучивание, тасбих, 99 имён Аллаhа, дуа и викторина.">
+  <meta property="og:locale" content="ru_RU">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <meta name="theme-color" content="#1f5a3a">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>Иман</a>
+  <nav>
+    <a href="#quran">Коран</a>
+    <a href="#tasbih">Тасбих</a>
+    <a href="#azkar">Азкары</a>
+    <a href="#dua">Дуа</a>
+    <a href="#asma">99 имён</a>
+    <a href="#alphabet">Алфавит</a>
+    <a href="#quiz">Викторина</a>
+    <a href="#stolpy">Столпы</a>
+    <a href="#channels">Каналы</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Коран · Зикр · Дуа</p>
+      <h1>Свет, который<br>ведёт к покою</h1>
+      <p class="lead">Коран с переводом и чтением вслух, тасбих, дуа и имена Аллаhа — всё для повседневной практики в одном месте.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#quran">Читать Коран</a>
+        <a class="btn ghost" href="#channels">Наши каналы</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <g fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="40" y="40" width="120" height="120"/>
+          <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+          <circle cx="100" cy="100" r="60"/>
+          <circle cx="100" cy="100" r="38"/>
+          <rect x="70" y="70" width="60" height="60" transform="rotate(22.5 100 100)"/>
+          <rect x="70" y="70" width="60" height="60" transform="rotate(-22.5 100 100)"/>
+        </g>
+        <text x="100" y="116" text-anchor="middle" class="art-ar">إيمان</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- КОРАН -->
+  <section id="quran" class="block quran-block">
+    <div class="block-head">
+      <h2>Коран</h2>
+      <p class="muted">Все 114 сур: арабский текст, смысловой перевод (русский или узбекский), режим заучивания и чтение вслух (Мишари аль-Афаси). Нужен интернет.</p>
+    </div>
+
+    <div class="q-tools">
+      <input id="q-search" type="search" placeholder="Сура: номер или название" aria-label="Поиск суры">
+      <button class="btn ghost" id="q-continue" hidden>Продолжить чтение</button>
+    </div>
+    <div class="q-tools">
+      <input id="t-search" type="search" placeholder="Слово в переводе: терпение" aria-label="Поиск по тексту перевода">
+      <button class="btn ghost" id="t-go" type="button">Искать</button>
+    </div>
+    <div id="t-results" class="t-results" aria-live="polite" hidden></div>
+    <div class="goal">
+      <label>Цель чтения
+        <select id="q-goal" aria-label="Цель чтения в день">
+          <option value="0">Без цели</option><option value="5">5 аятов в день</option>
+          <option value="10">10 аятов в день</option><option value="20">20 аятов в день</option>
+          <option value="50">50 аятов в день</option>
+        </select>
+      </label>
+      <span id="goal-info" class="muted" hidden></span>
+      <span class="muted goal-hint">Нажмите на аят, чтобы отметить его прочитанным.</span>
+    </div>
+    <p id="q-learned-count" class="muted" hidden></p>
+    <div id="q-bookmarks" class="chips" hidden></div>
+    <div id="q-list" class="q-list" aria-live="polite">Загрузка списка сур…</div>
+
+    <article id="q-reader" class="q-reader" hidden>
+      <header class="q-head">
+        <div>
+          <p class="eyebrow" id="q-meta"></p>
+          <h3 id="q-title"></h3>
+        </div>
+        <div class="q-nav">
+          <button class="btn ghost" id="q-prev" aria-label="Предыдущая сура">←</button>
+          <button class="btn ghost" id="q-next" aria-label="Следующая сура">→</button>
+          <button class="btn ghost" id="q-close">Закрыть</button>
+        </div>
+      </header>
+      <audio id="q-audio" controls preload="none"></audio>
+      <audio id="q-ayah-audio" preload="none"></audio>
+      <div class="q-opts">
+        <label><input type="checkbox" id="q-tr" checked> Перевод</label>
+        <label>Язык
+          <select id="q-lang" aria-label="Перевод">
+            <option value="ru.kuliev">Русский — Кулиев</option>
+            <option value="ru.osmanov">Русский — Османов</option>
+            <option value="ru.krachkovsky">Русский — Крачковский</option>
+            <option value="uz.sodik">Ўзбекча — Содик</option>
+          </select>
+        </label>
+        <label>Повтор аята
+          <select id="q-rep" aria-label="Сколько раз повторять аят">
+            <option value="1">1 раз</option><option value="3">3 раза</option>
+            <option value="5">5 раз</option><option value="10">10 раз</option>
+          </select>
+        </label>
+        <button class="btn ghost" id="q-learned" type="button">Отметить выученной</button>
+        <label>Заучивание
+          <select id="q-hifz" aria-label="Режим заучивания">
+            <option value="off">Выключено</option>
+            <option value="rest">Видно первое слово</option>
+            <option value="all">Аят скрыт</option>
+          </select>
+        </label>
+        <label>Размер шрифта <input type="range" id="q-size" min="24" max="56" value="34"></label>
+      </div>
+      <p class="ar q-bismillah" id="q-bismillah" lang="ar" dir="rtl" hidden>بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+      <p id="hifz-hint" class="muted" hidden>Заучивание: прочитайте аят по памяти, затем нажмите на него, чтобы проверить себя. Повторное нажатие скрывает снова.</p>
+      <p id="q-status" class="muted"></p>
+      <div id="q-ayahs"></div>
+    </article>
+  </section>
+
+  <!-- ТАСБИХ -->
+  <section id="tasbih" class="block">
+    <div class="block-head">
+      <h2>Тасбих</h2>
+      <p class="muted">Счётчик зикра. Значение сохраняется в браузере.</p>
+    </div>
+    <div class="tasbih">
+      <div class="dhikr-pick" id="dhikr-pick"></div>
+      <p class="ar dhikr-ar" id="dhikr-ar" lang="ar" dir="rtl"></p>
+      <p class="muted" id="dhikr-ru"></p>
+      <button class="counter" id="counter" aria-label="Прибавить один"><span id="count">0</span></button>
+      <div class="tasbih-ctl">
+        <span id="target-info">Цель: 33</span>
+        <label>Цель
+          <select id="target">
+            <option>33</option><option>34</option><option>99</option><option>100</option><option>0</option>
+          </select>
+        </label>
+        <button class="btn ghost" id="reset">Сбросить</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- АЗКАРЫ -->
+  <section id="azkar" class="block">
+    <div class="block-head">
+      <h2>Азкары</h2>
+      <p class="muted">Поминание Аллаhа после намаза, утром и вечером.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <h3>После каждого намаза</h3>
+        <p>33 раза «Субханаллаh», 33 раза «Альхамдулиллаh» и 34 раза «Аллаhу акбар». Для счёта используйте тасбих выше.</p>
+        <p><a class="link" href="#tasbih">Открыть тасбих →</a></p>
+      </article>
+      <article class="card">
+        <h3>Утром и вечером</h3>
+        <p>Читать суры «Аль-Ихляс», «Аль-Фаляк» и «Ан-Нас» по три раза.</p>
+        <p class="links">
+          <button class="link" data-open="112">Аль-Ихляс</button>
+          <button class="link" data-open="113">Аль-Фаляк</button>
+          <button class="link" data-open="114">Ан-Нас</button>
+        </p>
+      </article>
+      <article class="card">
+        <h3>Перед сном</h3>
+        <p>Аят аль-Курси (2:255) — самый великий аят Корана; его принято читать перед сном.</p>
+        <p class="links"><button class="link" data-open="2" data-ayah="255">Открыть Аят аль-Курси</button></p>
+      </article>
+      <article class="card">
+        <h3>Пятничная сура</h3>
+        <p>Сунна — читать суру «Аль-Кахф» в пятницу.</p>
+        <p class="links"><button class="link" data-open="18">Открыть «Аль-Кахф»</button></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ДУА -->
+  <section id="dua" class="block">
+    <div class="block-head">
+      <h2>Дуа</h2>
+      <p class="muted">Короткие мольбы из Корана.</p>
+    </div>
+    <div class="cards" id="dua-list"></div>
+  </section>
+
+  <!-- 99 ИМЁН -->
+  <section id="asma" class="block">
+    <div class="block-head">
+      <h2>99 прекрасных имён Аллаhа</h2>
+      <p class="muted">Арабское написание, русская транскрипция и смысловое значение. Буква «h» передаёт мягкий звук «ه» (как в «Аллаh»), «х» — звуки «ح» и «خ»; знаками ‘ и ’ обозначены айн и хамза. Формулировки значений в разных источниках могут немного отличаться.</p>
+    </div>
+    <div id="asma-list" class="asma">Загрузка…</div>
+  </section>
+
+  <!-- АЛФАВИТ -->
+  <section id="alphabet" class="block">
+    <div class="block-head">
+      <h2>Арабский алфавит</h2>
+      <p class="muted">28 букв, их написание в начале, середине и конце слова, и огласовки. Арабский пишется справа налево. Русские звуки приблизительны: точное произношение берите у учителя.</p>
+    </div>
+    <div id="letters" class="letters"></div>
+    <h3 class="sub">Огласовки на примере буквы «ба»</h3>
+    <div id="harakat" class="harakat"></div>
+  </section>
+
+  <!-- ВИКТОРИНА -->
+  <section id="quiz" class="block">
+    <div class="block-head">
+      <h2>Викторина</h2>
+      <p class="muted">Проверьте знания: десять вопросов за раунд.</p>
+    </div>
+    <div id="quiz-topics" class="chips"></div>
+    <div id="quiz-box" class="quiz-box" aria-live="polite"></div>
+  </section>
+
+  <!-- СТОЛПЫ -->
+  <section id="stolpy" class="block">
+    <div class="block-head">
+      <h2>Пять столпов ислама</h2>
+    </div>
+    <ol class="pillars">
+      <li><h3>Шахада</h3><p>Свидетельство веры: нет божества, кроме Аллаhа, и Мухаммад — Его посланник.</p></li>
+      <li><h3>Салят</h3><p>Пять ежедневных молитв — постоянная связь с Творцом.</p></li>
+      <li><h3>Закят</h3><p>Обязательная милостыня: часть имущества, которая принадлежит нуждающимся.</p></li>
+      <li><h3>Саум</h3><p>Пост в месяц Рамадан — от рассвета до заката.</p></li>
+      <li><h3>Хадж</h3><p>Паломничество в Мекку хотя бы раз в жизни для тех, кто способен.</p></li>
+    </ol>
+  </section>
+
+  <!-- КАНАЛЫ -->
+  <section id="channels" class="block">
+    <div class="block-head">
+      <h2>Наши каналы</h2>
+      <p class="muted">Подписывайтесь, чтобы не пропускать новое.</p>
+    </div>
+    <div class="socials">
+      <a class="social" href="https://t.me/quran_subtitl" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-9l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span><b>Telegram</b><small>t.me/quran_subtitl</small></span>
+      </a>
+      <a class="social" href="https://www.tiktok.com/@quran_subtitle.ru" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span><b>TikTok</b><small>@quran_subtitle.ru</small></span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p class="ar" lang="ar" dir="rtl">وَفَوْقَ كُلِّ ذِى عِلْمٍ عَلِيمٌ</p>
+  <p class="muted">Сайт носит ознакомительный характер. По религиозным вопросам обращайтесь к знающему учёному. Текст Корана, переводы и аудио загружаются с alquran.cloud и cdn.islamic.network.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
